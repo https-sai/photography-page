@@ -1,5 +1,7 @@
 // React Router imports for navigation and routing functionality
 import { Outlet, NavLink, useLocation } from 'react-router-dom'
+import FadeLayout from './components/FadeLayout'
+import SocialRail from './components/SocialRail'
 
 /**
  * Bracket Component
@@ -48,6 +50,11 @@ export default function App() {
   return (
     // Main container with full viewport height, flex column layout, and dark background
     <div className="min-h-dvh flex flex-col bg-slate-950">
+      <section className="relative">
+        <SocialRail />
+        {/* your narrative content here */}
+      </section>
+
       {/** Navbar */}
       <header className="py-6 px-4 md:px-8 flex items-center justify-between">
         <a href="/app" className="font-semibold tracking-wider uppercase">ANON</a>
@@ -61,7 +68,9 @@ export default function App() {
 
       {/** Main Content Area -> Outlet renders current child route component */}
       <main className="flex-1 py-8 px-4 md:px-8">
-        <Outlet />      
+        <FadeLayout>
+          <Outlet /> 
+        </FadeLayout>  
       </main>
 
       {/** Footer */}
