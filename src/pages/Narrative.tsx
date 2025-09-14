@@ -4,7 +4,8 @@ import SocialRail from '@/components/SocialRail'
 
 export default function Narrative() {
   return (
-    <div className="max-w-1xl px-30 mx-auto pb-24 flex gap-8">
+    <div className="">
+      
 
        <div className="p-8 flex items-center text-slate-300">
         <ReactTyped

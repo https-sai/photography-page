@@ -14,7 +14,7 @@ export default function Videography({
       {/* Gallery grid */}
       <div className="mx-auto max-w-6xl px-4 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {items.map((item, i) => (
-          <CascadeCard key={item.id} index={i} />
+          <CascadeCard key={item.id} />
         ))}
       </div>
     </section>
