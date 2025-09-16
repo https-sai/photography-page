@@ -75,3 +75,25 @@
 @utility text-balance {
   text-wrap: balance;
 }
+
+@keyframes marquee-x {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+
+  /* move left by half, because we duplicate the content */
+}
+
+@keyframes marquee-x-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
