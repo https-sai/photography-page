@@ -1,43 +1,29 @@
 import { useState } from 'react';
 import CascadeCard from '../components/CascadeCard';
 import ImageModal from '../components/ImageModal';
+import PhotoGrid from '@/components/PhotoGrid';
+import { photos } from '@/data/projects';
+import { id } from 'zod/v4/locales';
+import { Photo } from '@/components/PhotoGrid';
+import MarqueeGallery from '@/components/MarqueeGallery';
 
-export default function Videography({
-  items = Array.from({ length: 24 }).map((_, i) => ({ id: i })),
-  className = "",
-}: {
-  items?: { id: string | number }[];
-  className?: string;
-}) {
-  const [hovered, setHovered] = useState<number | null>(null);
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+export default function Videography() {
+
+  const gallery: Photo[] = photos.map(({ src, alt }) => ({ src, alt }));
+
   
   return (
-    <>
-      <section
-        className={`min-h-screen w-full bg-slate-950 text-white ${className}`}
-      >
-        {/* Gallery grid */}
-        <div className="mx-auto max-w-7xl px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {items.map((item, i) => (
-            <CascadeCard 
-              key={item.id} 
-              index={i} 
-              hovered={hovered}
-              setHovered={setHovered}
-              onClick={(index) => setSelectedImage(index)}
-            />
-          ))}
-        </div>
-      </section>
+    
 
-      {/* Image Modal */}
-      <ImageModal
-        isOpen={selectedImage !== null}
-        onClose={() => setSelectedImage(null)}
-        imageSrc={selectedImage !== null ? `https://picsum.photos/800/600?random=${selectedImage + 1}` : ''}
-        title={selectedImage !== null ? `Frame ${selectedImage + 1}` : ''}
-      />
-    </>
+
+    <div>
+      <div className='h-20'/>
+      <PhotoGrid items={gallery} minWidth={220} aspect="16/9" />
+      <MarqueeGallery items={gallery} rowsCount={1} tileWidth={240} aspect="16/9" />
+    </div>
+
+
+
+
   );
 }

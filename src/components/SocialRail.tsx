@@ -1,4 +1,4 @@
-import { Github, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
+
 
 type LinkItem = { 
   href: string; 
@@ -19,7 +19,7 @@ const SOCIAL_LINKS: LinkItem[] = [
   { href: "https://github.com/yourhandle", label: "GitHub", Icon: Github, color: "slate" },
 ];
 
-export default function SocialRail({ mode = 'color' }: SocialRailProps) {
+export default function SocialRail({ mode = 'mono' }: SocialRailProps) {
   const colorClasses = {
     pink: "border-pink-500/20 hover:border-pink-500/50 hover:shadow-pink-500/30 hover:from-pink-500/10 via-pink-400/20 text-pink-500 hover:text-pink-400",
     red: "border-red-500/20 hover:border-red-500/50 hover:shadow-red-500/30 hover:from-red-500/10 via-red-400/20 text-red-500 hover:text-red-400",
@@ -56,33 +56,36 @@ export default function SocialRail({ mode = 'color' }: SocialRailProps) {
       </nav>
     );
   }
+  else {
+    return (
+      <nav
+        aria-label="Social links"
+        className="fixed right-3 md:right-4 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col gap-3"
+      >
+        {SOCIAL_LINKS.map(({ href, label, Icon, color }, i) => {
+          const rotateClass = i % 2 === 0 ? "hover:rotate-3" : "hover:-rotate-3";
+          const currentColorClass = mode === 'mono' ? monoClass : colorClasses[color];
+          
+          return (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              className={`group p-2.5 rounded-full backdrop-blur-lg border bg-gradient-to-tr from-black/60 to-black/40 shadow-lg hover:shadow-2xl hover:scale-110 ${rotateClass} active:scale-95 active:rotate-0 transition-all duration-300 ease-out cursor-pointer hover:bg-gradient-to-tr hover:to-black/40 relative overflow-hidden ${currentColorClass}`}
+            >
+              <div className={`absolute inset-0 bg-gradient-to-r from-transparent to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out ${currentColorClass}`}></div>
+              <div className="relative z-10 grid place-items-center">
+                <Icon className="size-5 transition-colors duration-300" />
+              </div>
+              <span className="sr-only">{label}</span>
+            </a>
+          );
+        })}
+      </nav>
+    );
+  }
 
-  return (
-    <nav
-      aria-label="Social links"
-      className="fixed right-3 md:right-4 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col gap-3"
-    >
-      {SOCIAL_LINKS.map(({ href, label, Icon, color }, i) => {
-        const rotateClass = i % 2 === 0 ? "hover:rotate-3" : "hover:-rotate-3";
-        const currentColorClass = mode === 'mono' ? monoClass : colorClasses[color];
-        
-        return (
-          <a
-            key={label}
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={label}
-            className={`group p-2.5 rounded-full backdrop-blur-lg border bg-gradient-to-tr from-black/60 to-black/40 shadow-lg hover:shadow-2xl hover:scale-110 ${rotateClass} active:scale-95 active:rotate-0 transition-all duration-300 ease-out cursor-pointer hover:bg-gradient-to-tr hover:to-black/40 relative overflow-hidden ${currentColorClass}`}
-          >
-            <div className={`absolute inset-0 bg-gradient-to-r from-transparent to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out ${currentColorClass}`}></div>
-            <div className="relative z-10 grid place-items-center">
-              <Icon className="size-5 transition-colors duration-300" />
-            </div>
-            <span className="sr-only">{label}</span>
-          </a>
-        );
-      })}
-    </nav>
-  );
+  
 }

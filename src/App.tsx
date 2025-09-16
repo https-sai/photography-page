@@ -62,7 +62,7 @@ export default function App() {
     // Main container with full viewport height, flex column layout, and dark background
     <div className="min-h-dvh flex flex-col bg-slate-950">
       <section className="relative">
-        <SocialRail mode="color" />
+        <SocialRail mode="mono" />
         {/* your narrative content here */}
       </section>
 

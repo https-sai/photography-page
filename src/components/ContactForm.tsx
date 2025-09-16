@@ -135,7 +135,7 @@ export default function ContactForm({
                 {/* Glow background */}
                 <div
                   className="absolute inset-0 rounded-xl blur-lg opacity-60
-               bg-gradient-to-r from-indigo-500 via-pink-500 to-yellow-400
+               bg-gradient-to-r from-blue-500 via-sky-500 to-white
                transition-all duration-1000 group-hover:opacity-100 group-hover:duration-200"
                 ></div>
 
