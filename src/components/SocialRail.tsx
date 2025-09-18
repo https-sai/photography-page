@@ -65,7 +65,7 @@ export default function SocialRail({ mode = 'mono' }: SocialRailProps) {
       >
         {SOCIAL_LINKS.map(({ href, label, Icon, color }, i) => {
           const rotateClass = i % 2 === 0 ? "hover:rotate-3" : "hover:-rotate-3";
-          const currentColorClass = mode === 'mono' ? monoClass : colorClasses[color];
+          const currentColorClass = mode === 'mono' ? colorClasses["slate"] : colorClasses["slate"];
           
           return (
             <a

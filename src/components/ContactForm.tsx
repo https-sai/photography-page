@@ -83,7 +83,8 @@ export default function ContactForm({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6 bg-slate-900/50 backdrop-blur-sm p-8 rounded-3xl border border-slate-700/50 shadow-2xl"
+          className="space-y-6 bg-black/50 backdrop-blur-sm p-8 rounded-3xl border border-slate-700/50 shadow-2xl
+                      hover:border-white/50"
         >
           <FormField
             control={form.control}
@@ -114,13 +115,13 @@ export default function ContactForm({
                 <FormLabel className="text-slate-200 text-base font-medium">
                   Your Message
                 </FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="Tell me about your photography needs, vision, or any questions you have..."
-                    className="min-h-[120px] bg-slate-800/50 border-slate-600/50 text-white placeholder:text-slate-400 rounded-xl focus:border-blue-400 transition-colors resize-none"
-                    {...field}
-                  />
-                </FormControl>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Tell me about your photography needs, vision, or any questions you have..."
+                      className="min-h-[120px] bg-slate-800/50 border-slate-600/50 text-white placeholder:text-slate-400 rounded-xl focus:border-blue-400 transition-colors resize-none"
+                      {...field}
+                    />
+                  </FormControl>
                 <FormMessage className="text-red-400" />
               </FormItem>
             )}
@@ -135,19 +136,20 @@ export default function ContactForm({
                 {/* Glow background */}
                 <div
                   className="absolute inset-0 rounded-sm blur-lg opacity-60
-               bg-gradient-to-r from-blue-500 via-sky-500 to-white
-               transition-all duration-1000 group-hover:opacity-100 group-hover:duration-200"
-                ></div>
+                            bg-gradient-to-r from-blue-500 via-sky-500 to-white
+                            transition-all duration-1000 group-hover:opacity-100 group-hover:duration-200"
+                >
+                </div>
 
                 {/* Functional Send Button */}
                 <button
                   type="submit"
                   disabled={form.formState.isSubmitting}
                   className="group relative inline-flex items-center justify-center text-base 
-               rounded-xl bg-gray-900 px-8 py-3 font-semibold text-white
-               transition-all duration-200 
-               hover:bg-gray-800 hover:shadow-sm hover:-translate-y-0.5 hover:shadow-gray-600/30
-               disabled:opacity-50 disabled:cursor-not-allowed"
+                            rounded-xl bg-gray-900 px-8 py-3 font-semibold text-white
+                            transition-all duration-200 
+                            hover:bg-gray-800 hover:shadow-sm hover:-translate-y-0.5 hover:shadow-gray-600/30
+                            disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {form.formState.isSubmitting ? (
                     <>

@@ -11,13 +11,28 @@ const links = [
   { label: "Contact", href: "mailto:hello@example.com" },
 ];
 
-const items = Array.from({ length: 12 }, (_, i) => ({ id: i + 1 }));
+const items = [
+  "Adobe Lightroom Classic",
+  "Adobe Photoshop",
+  "Adobe Camera Raw",
+  "Capture One Pro",
+  "Photo Mechanic",
+  "Adobe Premiere Pro",
+  "DaVinci Resolve",
+  "Final Cut Pro",
+  "Adobe After Effects",
+  "Adobe Audition",
+  "Adobe Media Encoder",
+  "Frame.io",
+  "Topaz Photo AI",
+  "Topaz Video AI",
+  "Helicon Focus",
+  "LRTimelapse",
+  "iZotope RX",
+  "Logic Pro"
+];
 
 export default function Contact() {
-
-  const rotateClass = "hover:rotate-3" 
-  const monoClass = "border-white/20 hover:border-white/50 hover:shadow-white/30 hover:from-white/10 via-white/10 text-slate-300 hover:text-white";
-  const currentColorClass = monoClass;
 
   return (
     <div className="items-align justify-center max-w-5xl mx-auto ">
@@ -34,14 +49,15 @@ export default function Contact() {
           pauseOnHover
           fadeEdges
           renderItem={(item) => (
-            <div className={`h-10 w-20 rounded-xl 
+            <div className={`h-10 w-fit px-3 rounded-xl 
               group grid place-items-center
-              backdrop-blur-lg border bg-gradient-to-tr from-black/60 to-black/40 shadow-lg 
+              border bg-black/20
               hover:shadow-2xl hover:bg-gradient-to-tr hover:to-black/40 
-              active:scale-95 active:rotate-0 transition-all duration-300 ease-out cursor-pointer
-              
-              relative ${currentColorClass}`}>
-              Hello
+              active:scale-95 transition-all duration-300 ease-out cursor-pointer
+              text-sm
+              relative 
+              border-white/20 hover:border-white/50 hover:shadow-white/30 hover:from-white/10 via-white/20 text-slate-300 hover:text-white`}>
+              {item}
                
             </div>
           )}
