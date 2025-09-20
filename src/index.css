@@ -34,6 +34,14 @@
   --ring: oklch(0.556 0 0);
 }
 
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* 2) Map to Tailwind v4 theme variables so classes like bg-background exist */
 @theme inline {
   --color-background: var(--background);

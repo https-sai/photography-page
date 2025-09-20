@@ -1,3 +1,4 @@
+import FilmstripGallery from '@/components/FilmstripGallery';
 import CascadeCard from '../components/CascadeCard';
 import Gallery from '@/components/Gallery';
 
@@ -9,6 +10,6 @@ export default function Photography({
   className?: string;
 }) {
   return (
-    <Gallery/>
+    <FilmstripGallery />
   );
 }
