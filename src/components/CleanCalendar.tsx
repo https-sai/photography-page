@@ -7,7 +7,6 @@ export default function CleanCalendar() {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
 
   return (
-    // ⬇️ This wrapper should be inside your yellow container.
     // Make the parent give it size, e.g. className="h-[420px] w-full" or "h-full w-full".
     <Card className="h-full w-full p-3 shadow-lg">
       <Calendar

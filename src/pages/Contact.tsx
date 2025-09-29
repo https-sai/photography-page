@@ -87,7 +87,7 @@ export default function Contact() {
       <div className="flex flex-col gap-2 p-8">
         <InfiniteMarquee
           items={logos}
-          speedSeconds={10}
+          speedSeconds={40}
           gapClass="gap-10"
           fadeEdges
           renderItem={(logo) => (

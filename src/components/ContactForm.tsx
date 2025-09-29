@@ -77,8 +77,8 @@ export default function ContactForm({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6 backdrop-blur-sm p-8 rounded-3xl border shadow-2xl
-                    border-white/50 hover:border-white"
+          className="bg-slate-900/50 space-y-6 backdrop-blur-sm p-8 rounded-3xl border shadow-2xl
+                    border-white/30 hover:border-white/50"
         >
           <FormField
             control={form.control}

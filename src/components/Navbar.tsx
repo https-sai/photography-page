@@ -37,7 +37,7 @@ function NavItem({ to, children }: { to: string; children: React.ReactNode }) {
 export default function Navbar() {
   return (
     <main className="p-4">
-      <header className="rounded-2xl p-2 md:px-8 flex items-center justify-between bg-slate-800/50">
+      <header className="border-1 border-white/50 rounded-2xl p-2 md:px-8 flex items-center justify-between ">
         <a href="/app" className="font-semibold tracking-wider uppercase">
           ANON
         </a>

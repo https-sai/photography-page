@@ -1,22 +1,11 @@
-import {
-  Github,
-  Instagram,
-  Linkedin,
-  Twitter,
-  Youtube,
-  icons,
-} from "lucide-react";
-import "lucide-react";
+// SocialRail.tsx
+import React from "react";
+import { Github, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 
 type LinkItem = {
   href: string;
   label: string;
   Icon: React.ComponentType<{ className?: string }>;
-  color: "pink" | "red" | "blue" | "indigo" | "slate";
-};
-
-type SocialRailProps = {
-  mode?: "original" | "mono" | "color";
 };
 
 const SOCIAL_LINKS: LinkItem[] = [
@@ -24,105 +13,72 @@ const SOCIAL_LINKS: LinkItem[] = [
     href: "https://instagram.com/yourhandle",
     label: "Instagram",
     Icon: Instagram,
-    color: "pink",
   },
-  {
-    href: "https://youtube.com/@yourhandle",
-    label: "YouTube",
-    Icon: Youtube,
-    color: "red",
-  },
-  {
-    href: "https://x.com/yourhandle",
-    label: "Twitter / X",
-    Icon: Twitter,
-    color: "blue",
-  },
+  { href: "https://youtube.com/@yourhandle", label: "YouTube", Icon: Youtube },
+  { href: "https://x.com/yourhandle", label: "Twitter / X", Icon: Twitter },
   {
     href: "https://www.linkedin.com/in/yourhandle",
     label: "LinkedIn",
     Icon: Linkedin,
-    color: "indigo",
   },
-  {
-    href: "https://github.com/yourhandle",
-    label: "GitHub",
-    Icon: Github,
-    color: "slate",
-  },
+  { href: "https://github.com/yourhandle", label: "GitHub", Icon: Github },
 ];
 
-export default function SocialRail({ mode = "mono" }: SocialRailProps) {
-  const colorClasses = {
-    pink: "border-pink-500/20 hover:border-pink-500/50 hover:shadow-pink-500/30 hover:from-pink-500/10 via-pink-400/20 text-pink-500 hover:text-pink-400",
-    red: "border-red-500/20 hover:border-red-500/50 hover:shadow-red-500/30 hover:from-red-500/10 via-red-400/20 text-red-500 hover:text-red-400",
-    blue: "border-blue-500/20 hover:border-blue-500/50 hover:shadow-blue-500/30 hover:from-blue-500/10 via-blue-400/20 text-blue-500 hover:text-blue-400",
-    indigo:
-      "border-indigo-500/20 hover:border-indigo-500/50 hover:shadow-indigo-500/30 hover:from-indigo-500/10 via-indigo-400/20 text-indigo-500 hover:text-indigo-400",
-    slate:
-      "border-white/20 hover:border-white/50 hover:shadow-white/30 hover:from-white/10 via-white/20 text-white hover:text-white/90",
-  };
-
-  const monoClass =
-    "border-white/20 hover:border-white/50 hover:shadow-white/30 hover:from-white/10 via-white/20 text-slate-300 hover:text-white";
-
-  if (mode === "original") {
-    return (
-      <nav
-        aria-label="Social links"
-        className="fixed right-3 md:right-4 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col gap-2"
-      >
-        {SOCIAL_LINKS.map(({ href, label, Icon }) => (
+export default function SocialRail() {
+  return (
+    <nav
+      aria-label="Social links"
+      className="fixed right-3 md:right-4 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col gap-3"
+    >
+      {SOCIAL_LINKS.map(({ href, label, Icon }, i) => {
+        const rotateClass = i % 2 === 0 ? "hover:rotate-3" : "hover:-rotate-3";
+        return (
           <a
             key={label}
             href={href}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={label}
-            className="group grid place-items-center size-10 rounded-full border border-white/10
-                       bg-slate-700 backdrop-blur transition hover:bg-slate-900 hover:scale-95
-                       shadow-lg hover:shadow-xl
-                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
-                       focus-visible:ring-offset-2 ring-offset-background"
+            className={[
+              "group relative overflow-hidden cursor-pointer",
+              "p-2.5 rounded-full backdrop-blur-lg",
+              // glossy slate button
+              "border border-white/30 ring-1 ring-white/5",
+              "bg-gradient-to-tr from-slate-900/70 to-slate-800/50",
+              "shadow-lg hover:shadow-2xl hover:scale-110 active:scale-95 active:rotate-0",
+              "transition-all duration-300 ease-out hover:border-white/50",
+              rotateClass,
+              // default icon color (inherited) + hover
+              "text-slate-200 hover:text-white",
+            ].join(" ")}
           >
-            <Icon className="size-5 text-slate-300 transition group-hover:text-white" />
+            {/* center glow / shine (always on, subtle) */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-0 rounded-full
+                         [background:radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.18)_0%,rgba(255,255,255,0.06)_45%,transparent_60%)]"
+            />
+
+            {/* sweeping flash on hover */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-0 -translate-x-full
+             bg-gradient-to-r from-transparent via-white/80 to-transparent
+             opacity-80 group-hover:opacity-100
+             group-hover:translate-x-full
+             transition-[transform,opacity] duration-500 ease-out
+             blur-sm mix-blend-screen"
+            />
+
+            {/* icon */}
+            <span className="relative z-10 grid place-items-center">
+              <Icon className="size-5 transition-colors duration-300 drop-shadow" />
+            </span>
+
             <span className="sr-only">{label}</span>
           </a>
-        ))}
-      </nav>
-    );
-  } else {
-    return (
-      <nav
-        aria-label="Social links"
-        className="fixed right-3 md:right-4 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col gap-3"
-      >
-        {SOCIAL_LINKS.map(({ href, label, Icon, color }, i) => {
-          const rotateClass =
-            i % 2 === 0 ? "hover:rotate-3" : "hover:-rotate-3";
-          const currentColorClass =
-            mode === "mono" ? colorClasses["slate"] : colorClasses["slate"];
-
-          return (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              className={`group p-2.5 rounded-full backdrop-blur-lg border bg-gradient-to-tr from-black/60 to-black/40 shadow-lg hover:shadow-2xl hover:scale-110 ${rotateClass} active:scale-95 active:rotate-0 transition-all duration-300 ease-out cursor-pointer hover:bg-gradient-to-tr hover:to-slate/40 relative overflow-hidden ${currentColorClass}`}
-            >
-              <div
-                className={`absolute inset-0 bg-gradient-to-r from-transparent to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out border-white/20 hover:border-white/50 hover:shadow-white/30 hover:from-white/10 via-white/20 text-white hover:text-white/90`}
-              ></div>
-              <div className="relative z-10 grid place-items-center">
-                <Icon className="size-5 transition-colors duration-300" />
-              </div>
-              <span className="sr-only">{label}</span>
-            </a>
-          );
-        })}
-      </nav>
-    );
-  }
+        );
+      })}
+    </nav>
+  );
 }
