@@ -1,8 +1,9 @@
-import NetflixGalleryPage from '@/components/NetflixGalleryPage';
-import CascadeCard from '../components/CascadeCard';
+import HoverVideoGallery from "@/components/HoverVideoGallery";
 
-export default function Videography(){
+export default function Videography() {
   return (
-    <NetflixGalleryPage />
+    <main className="">
+      <HoverVideoGallery />
+    </main>
   );
 }

@@ -42,6 +42,35 @@
   display: none;
 }
 
+.dotted-background-container {
+  width: 100%;
+  height: 300px; /* Adjust as needed */
+  background-image: radial-gradient(circle at 1px 1px, oklch(37.2% 0.044 257.287) 1px, transparent 1px);
+  background-size: 20px 20px; /* Dot spacing */
+  background-color: #020617; /* slate-950 */
+}
+
+.grid-background-container {
+  width: 100%;
+  height: full; /* Adjust as needed */
+  --grid-size: 50px;                    /* spacing between lines */
+  --grid-thickness: 1px;                /* line weight */
+  --grid-color: oklch(37.2% 0.044 257.287 / 0.35); /* subtle indigo-ish */
+  background-color: #020617;            /* slate-950 */
+  background-image:
+    repeating-linear-gradient(
+      to right,
+      var(--grid-color) 0 calc(var(--grid-thickness)),
+      transparent calc(var(--grid-thickness)) var(--grid-size)
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      var(--grid-color) 0 calc(var(--grid-thickness)),
+      transparent calc(var(--grid-thickness)) var(--grid-size)
+    );
+  background-size: var(--grid-size) var(--grid-size);
+}
+
 /* 2) Map to Tailwind v4 theme variables so classes like bg-background exist */
 @theme inline {
   --color-background: var(--background);

@@ -74,17 +74,11 @@ export default function ContactForm({
 
   return (
     <div className={`max-w-2xl mx-auto ${className}`}>
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">Get In Touch</h1>
-        <p className="text-slate-400">
-          Let's discuss your next photography project
-        </p>
-      </div>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6 bg-black/50 backdrop-blur-sm p-8 rounded-3xl border border-slate-700/50 shadow-2xl
-                      hover:border-white/50"
+          className="space-y-6 bg-black/50 backdrop-blur-sm p-8 rounded-3xl border shadow-2xl
+                    border-white/50 hover:border-white"
         >
           <FormField
             control={form.control}
@@ -115,13 +109,13 @@ export default function ContactForm({
                 <FormLabel className="text-slate-200 text-base font-medium">
                   Your Message
                 </FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Tell me about your photography needs, vision, or any questions you have..."
-                      className="min-h-[120px] bg-slate-800/50 border-slate-600/50 text-white placeholder:text-slate-400 rounded-xl focus:border-blue-400 transition-colors resize-none"
-                      {...field}
-                    />
-                  </FormControl>
+                <FormControl>
+                  <Textarea
+                    placeholder="Tell me about your photography needs, vision, or any questions you have..."
+                    className="min-h-[120px] bg-slate-800/50 border-slate-600/50 text-white placeholder:text-slate-400 rounded-xl focus:border-blue-400 transition-colors resize-none"
+                    {...field}
+                  />
+                </FormControl>
                 <FormMessage className="text-red-400" />
               </FormItem>
             )}
@@ -138,8 +132,7 @@ export default function ContactForm({
                   className="absolute inset-0 rounded-sm blur-lg opacity-60
                             bg-gradient-to-r from-blue-500 via-sky-500 to-white
                             transition-all duration-1000 group-hover:opacity-100 group-hover:duration-200"
-                >
-                </div>
+                ></div>
 
                 {/* Functional Send Button */}
                 <button

@@ -1,7 +1,8 @@
-import ContactForm from "@/components/ContactForm"
-import { Badge } from "@/components/ui/badge"
-import { badgeVariants } from "@/components/ui/badge";
+import ContactForm from "@/components/ContactForm";
+import { Calendar } from "@/components/ui/calendar";
 import InfiniteMarquee from "@/components/InfiniteMarquee";
+import React from "react";
+import CleanCalendar from "@/components/CleanCalendar";
 
 const links = [
   { label: "Docs", href: "https://ui.shadcn.com/docs/components/badge" },
@@ -29,19 +30,29 @@ const items = [
   "Helicon Focus",
   "LRTimelapse",
   "iZotope RX",
-  "Logic Pro"
+  "Logic Pro",
 ];
 
 export default function Contact() {
-
+  const [date, setDate] = React.useState<Date | undefined>(new Date());
   return (
     <div className="items-align justify-center max-w-5xl mx-auto ">
-      <div>
-        <ContactForm/>
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold text-white mb-2">Get In Touch</h1>
+        <p className="text-slate-400">
+          Let's discuss your next photography project
+        </p>
       </div>
-      
-      <main className="min-h-screen bg-slate-950 text-slate-100 flex flex-col gap-12 p-8">
+      <div className="grid grid-cols-3 gap-4">
+        <div className="col-span-2">
+          <ContactForm />
+        </div>
+        <div className="">
+          <CleanCalendar />
+        </div>
+      </div>
 
+      <main className=" text-slate-100 flex flex-col gap-12 p-8">
         <InfiniteMarquee
           items={items}
           speedSeconds={10}
@@ -49,24 +60,21 @@ export default function Contact() {
           pauseOnHover
           fadeEdges
           renderItem={(item) => (
-            <div className={`h-10 w-fit px-3 rounded-xl 
+            <div
+              className={`h-10 w-fit px-3 rounded-xl 
               group grid place-items-center
               border bg-black/20
               hover:shadow-2xl hover:bg-gradient-to-tr hover:to-black/40 
               active:scale-95 transition-all duration-300 ease-out cursor-pointer
               text-sm
               relative 
-              border-white/20 hover:border-white/50 hover:shadow-white/30 hover:from-white/10 via-white/20 text-slate-300 hover:text-white`}>
+              border-white/20 hover:border-white/50 hover:shadow-white/30 hover:from-white/10 via-white/20 text-slate-300 hover:text-white`}
+            >
               {item}
-               
             </div>
           )}
         />
-
-        
       </main>
-      
-      
     </div>
-  )
+  );
 }

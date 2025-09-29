@@ -5,7 +5,6 @@ import { ReactTyped } from "react-typed";
 
 export default function Loading() {
   const navigate = useNavigate();
-
   const [percent, setPercent] = useState(0);
   const [doneTyping, setDoneTyping] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
