@@ -113,24 +113,15 @@
   text-wrap: balance;
 }
 
-@keyframes marquee-x {
-  0% {
-    transform: translateX(0);
+
+
+@layer utilities {
+  @keyframes marquee-px {
+    from { transform: translateX(0); }
+    to   { transform: translateX(calc(-1 * var(--listW, 0px))); }
   }
-
-  100% {
-    transform: translateX(-50%);
-  }
-
-  /* move left by half, because we duplicate the content */
-}
-
-@keyframes marquee-x-reverse {
-  0% {
-    transform: translateX(-50%);
-  }
-
-  100% {
-    transform: translateX(0);
+  @keyframes marquee-px-reverse {
+    from { transform: translateX(calc(-1 * var(--listW, 0px))); }
+    to   { transform: translateX(0); }
   }
 }

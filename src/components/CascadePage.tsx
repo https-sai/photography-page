@@ -94,12 +94,6 @@ export default function CascadePage({ images, className = "" }: Props) {
       ref={root}
       className={`min-h-screen w-full text-slate-100 ${className}`}
     >
-      {/* Top progress bar */}
-      <motion.div
-        className="fixed left-0 top-0 h-1 w-full origin-left bg-white/60 z-50"
-        style={{ scaleX: scrollYProgress }}
-      />
-
       <section className="cf-grid mx-auto max-w-6xl px-0.5 pb-24 pt-16">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
           {images.map((photo, i) => (
