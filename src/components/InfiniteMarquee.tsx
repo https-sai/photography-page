@@ -117,11 +117,6 @@ export default function InfiniteMarquee<T>({
           </li>
         ))}
       </ul>
-
-      {/* Respect reduced motion */}
-      <div className="sr-only motion-reduce:not-sr-only">
-        Animations are reduced per system preferences.
-      </div>
     </div>
   );
 }

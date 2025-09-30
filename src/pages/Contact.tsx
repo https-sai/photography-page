@@ -1,14 +1,15 @@
-import ContactForm from "@/components/ContactForm";
-import { Calendar } from "@/components/ui/calendar";
-import InfiniteMarquee from "@/components/InfiniteMarquee";
+// Contact.tsx
 import React from "react";
+import ContactForm from "@/components/ContactForm";
+import InfiniteMarquee from "@/components/InfiniteMarquee";
 import CleanCalendar from "@/components/CleanCalendar";
+import { MotionConfig, motion, useReducedMotion } from "framer-motion";
 
 // Logo types
 type LogoItem = {
   name: string;
-  src: string; // path to your logo (prefer SVG)
-  href?: string; // optional link to the product site
+  src: string;
+  href?: string;
   alt?: string;
 };
 
@@ -54,13 +55,11 @@ export const logos: LogoItem[] = [
     alt: "Bootstrap",
   },
   { name: "CSS SVG Icons", src: "/logos/CSS SVG Icons.svg", alt: "CSS" },
-
   {
     name: "Figma SVG Vectors and Icons",
     src: "/logos/Figma SVG Vectors and Icons.svg",
     alt: "Figma",
   },
-
   { name: "HTML SVG Icons", src: "/logos/HTML SVG Icons.svg", alt: "HTML" },
   {
     name: "Javascript SVG Icons",
@@ -72,7 +71,6 @@ export const logos: LogoItem[] = [
     src: "/logos/MongoDB SVG Icons.svg",
     alt: "MongoDB",
   },
-
   {
     name: "Tailwind CSS Icon",
     src: "/logos/Tailwind CSS Icon.svg",
@@ -80,46 +78,78 @@ export const logos: LogoItem[] = [
   },
 ];
 
+// --- Animation presets ---
+// parent controls the stagger
+const container = {
+  hidden: {},
+  show: {
+    transition: {
+      delayChildren: 0.1, // small lead-in before the first child
+      staggerChildren: 0.35, // gap between each child’s start
+    },
+  },
+};
+
+const fadeJump = {
+  hidden: { opacity: 0, y: 28, scale: 0.98 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: "spring", stiffness: 180, damping: 24, mass: 1.1 },
+  },
+};
+
 export default function Contact() {
-  const [date, setDate] = React.useState<Date | undefined>(new Date());
+  const prefersReduced = useReducedMotion();
+
   return (
-    <div className="items-align justify-center max-w-5xl mx-auto ">
-      <div className="flex flex-col gap-2 p-8">
-        <InfiniteMarquee
-          items={logos}
-          speedSeconds={40}
-          gapClass="gap-10"
-          fadeEdges
-          renderItem={(logo) => (
-            <a
-              href={logo.href || "#"}
-              aria-label={logo.name}
-              className="inline-flex items-center"
-              tabIndex={-1} // avoid too many focus stops if you duplicate the list
-            >
-              <img
-                src={logo.src}
-                alt={logo.alt ?? logo.name}
-                loading="lazy"
-                className="h-10 w-auto opacity-80 hover:opacity-300 hover:border-white hover:grayscale-0 transition"
-                // If some logos look too tall, add 'max-h-10' to clamp them
-              />
-            </a>
-          )}
-        />
+    <MotionConfig>
+      <div className="max-w-5xl mx-auto">
+        {/* THIS parent wraps the 3 main blocks to stagger them */}
+        <motion.section
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.25 }}
+        >
+          {/* 1st child */}
+          <motion.div variants={fadeJump} className="md:col-span-3">
+            <InfiniteMarquee
+              items={logos}
+              speedSeconds={30}
+              gapClass="gap-10"
+              fadeEdges
+              renderItem={(logo) => (
+                <a
+                  href={logo.href || "#"}
+                  aria-label={logo.name}
+                  className="inline-flex items-center"
+                  tabIndex={-1}
+                >
+                  <img
+                    src={logo.src}
+                    alt={logo.alt ?? logo.name}
+                    loading="lazy"
+                    className="h-10 w-auto opacity-80 hover:opacity-100 hover:grayscale-0 transition"
+                  />
+                </a>
+              )}
+            />
+          </motion.div>
+
+          {/* 2nd child */}
+          <motion.div variants={fadeJump} className="w-full md:col-span-2">
+            <ContactForm />
+          </motion.div>
+
+          {/* 3rd child */}
+          <motion.div variants={fadeJump} className="w-full">
+            <CleanCalendar />
+          </motion.div>
+        </motion.section>
       </div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-2">Get In Touch</h1>
-        <p className="text-slate-400">Let's discuss your next project</p>
-      </div>
-      <div className="grid grid-cols-3 gap-8">
-        <div className="w-full col-span-2">
-          <ContactForm />
-        </div>
-        <div className="w-full">
-          <CleanCalendar />
-        </div>
-      </div>
-    </div>
+    </MotionConfig>
   );
 }

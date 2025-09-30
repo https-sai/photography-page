@@ -1,4 +1,10 @@
 import CascadePage from "@/components/CascadePage";
+import PhotoGallery from "@/components/PhotoGallery";
+import * as React from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Photo = {
   src: string;
@@ -104,10 +110,49 @@ const photos: Photo[] = [
   },
 ];
 
+//<CascadePage images={photos} className="text-white" />
+
 export default function Photography() {
+  const sentinelRef = React.useRef<HTMLDivElement | null>(null);
+  const [showCascade, setShowCascade] = React.useState(false);
+  const cascadeRef = React.useRef<HTMLDivElement | null>(null);
+
+  React.useLayoutEffect(() => {
+    if (!sentinelRef.current) return;
+
+    // Fire once when the sentinel (right after PhotoGallery) reaches the viewport
+    const st = ScrollTrigger.create({
+      trigger: sentinelRef.current,
+      start: "top bottom", // when sentinel top hits bottom of viewport
+      once: true,
+      onEnter: () => setShowCascade(true),
+    });
+
+    return () => st.kill();
+  }, []);
+
+  // Optional: nice fade-in when CascadePage mounts
+  React.useLayoutEffect(() => {
+    if (!showCascade || !cascadeRef.current) return;
+    gsap.fromTo(
+      cascadeRef.current,
+      { autoAlpha: 0, y: 24 },
+      { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out" }
+    );
+  }, [showCascade]);
+
   return (
-    <main className="">
-      <CascadePage images={photos} className="text-white" />
+    <main>
+      <PhotoGallery photos={photos} />
+
+      {/* sentinel placed immediately after the gallery */}
+      <div ref={sentinelRef} className="h-px" />
+
+      {showCascade && (
+        <div ref={cascadeRef}>
+          <CascadePage images={photos} />
+        </div>
+      )}
     </main>
   );
 }

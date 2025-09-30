@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 
 import SocialRail from "./components/SocialRail";
 import Navbar from "./components/Navbar";
+import AnimatedNavbar from "./components/AnimatedNavBar";
 
 import { useScroll, motion } from "framer-motion";
 import React from "react";
@@ -22,18 +23,20 @@ export default function App() {
     // Main container with full viewport height, flex column layout, and dark background
     <div className="min-h-dvh flex flex-col grid-background-container">
       <motion.div
-        className="fixed left-0 top-0 h-2 w-full origin-left bg-white/60 z-50"
+        className="fixed left-0 top-0 h-1 w-full origin-left bg-white/60 z-50"
         style={{ scaleX: scrollYProgress }}
       />
       <section className="relative">
-        <SocialRail mode="color" />
+        <SocialRail />
       </section>
 
       {/** Navbar */}
-      <Navbar />
+      <section className="relative">
+        <AnimatedNavbar />
+      </section>
 
       {/** Main Content Area -> Outlet renders current child route component */}
-      <main className="flex-1 py-8 px-4 md:px-8">
+      <main className="flex-1 py-2 px-4 md:px-8">
         <Outlet />
       </main>
 
