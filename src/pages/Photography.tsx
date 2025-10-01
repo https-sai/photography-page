@@ -131,6 +131,15 @@ export default function Photography() {
 
   return (
     <main>
+      <div className="flex items-center gap-2">
+        <span>Scroll</span>
+        <motion.span
+          animate={{ y: [0, 6, 0] }}
+          transition={{ repeat: Infinity, duration: 1.4, ease: "easeInOut" }}
+        >
+          ↓
+        </motion.span>
+      </div>
       <PhotoGallery photos={photos} />
 
       {/* sentinel placed immediately after the gallery */}
