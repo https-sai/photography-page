@@ -47,15 +47,23 @@ export default function ContactForm({
 
   async function onSubmit(values: ContactValues) {
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("https://formspree.io/f/myznwnkp", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ email: values.email, message: values.message }),
       });
 
       if (!res.ok) {
-        const t = await res.text();
-        throw new Error(t || "Failed to send message");
+        let t = "Failed to send message";
+        try {
+          const data = await res.json();
+          if (data?.errors?.length)
+            t = data.errors.map((e: any) => e.message).join("\n");
+        } catch {}
+        throw new Error(t);
       }
 
       form.reset();

@@ -57,8 +57,8 @@ export default function Navbar() {
   }, [measure]);
 
   return (
-    <main className="p-4">
-      <header className="border border-white/50 rounded-2xl p-2 md:px-8 flex items-center justify-between">
+    <div className="items-center p-4">
+      <header className="w-full border border-white/50 rounded-2xl p-2 md:px-8 flex items-center justify-between">
         <a
           href="/app"
           className="font-semibold tracking-wider uppercase hover:scale-103"
@@ -156,6 +156,6 @@ export default function Navbar() {
           ))}
         </nav>
       </header>
-    </main>
+    </div>
   );
 }

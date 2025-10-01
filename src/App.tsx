@@ -2,11 +2,12 @@
 import { Outlet } from "react-router-dom";
 
 import SocialRail from "./components/SocialRail";
-import Navbar from "./components/Navbar";
-import AnimatedNavbar from "./components/AnimatedNavBar";
+import AnimatedNavbar from "./components/AnimatedNavbar";
+import PageTransitionOverlay from "./components/PageTransitionOverlay";
 
 import { useScroll, motion } from "framer-motion";
 import React from "react";
+import { fadeJump } from "./pages/Contact";
 
 /**
  * Main App Component
@@ -22,6 +23,7 @@ export default function App() {
   return (
     // Main container with full viewport height, flex column layout, and dark background
     <div className="min-h-dvh flex flex-col grid-background-container">
+      <PageTransitionOverlay />
       <motion.div
         className="fixed left-0 top-0 h-1 w-full origin-left bg-white/60 z-50"
         style={{ scaleX: scrollYProgress }}

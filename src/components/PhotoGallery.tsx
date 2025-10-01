@@ -23,7 +23,7 @@ export default function PhotoGallery({ photos }: Props) {
       <RowStrip title="[ Row 1 ]" photos={row1} />
       <RowStrip title="[ Row 2 ]" photos={row2} />
       <RowStrip title="[ Row 3 ]" photos={row3} />
-      <RowStrip title="[ Row 3 ]" photos={row4} />
+      <RowStrip title="[ Row 4 ]" photos={row4} />
 
       {/* Outro spacer */}
       <section className="w-full min-h-[40vh]" />
@@ -54,10 +54,10 @@ function RowStrip({
         const distance = () =>
           Math.max(0, trackRef.current!.scrollWidth - window.innerWidth);
 
-        // Optional: set initial opacity (row starts slightly hidden)
-        gsap.set(trackRef.current, { autoAlpha: 1 });
+        // start hidden
+        gsap.set(trackRef.current, { autoAlpha: 0 });
+        gsap.set(labelRef.current, { autoAlpha: 0, y: -8 });
 
-        // 1) Horizontal scroll + pin
         const tween = gsap.fromTo(
           trackRef.current,
           { x: () => (reverse ? -distance() : 0) },
@@ -68,13 +68,34 @@ function RowStrip({
             scrollTrigger: {
               trigger: sectionRef.current!,
               start: "center center",
-              end: () => `+=${distance()}`,
+              end: () => `=${distance()}`,
               scrub: 1,
               pin: true,
               pinSpacing: true,
               anticipatePin: 1,
               invalidateOnRefresh: true,
-              // markers: true,
+
+              // ✅ fade row title in at start, fade out when leaving back
+              onToggle: (self) => {
+                const row = trackRef.current as gsap.DOMTarget;
+                const label = labelRef.current as gsap.DOMTarget | null;
+                if (row) {
+                  gsap.to(row, {
+                    autoAlpha: self.isActive ? 1 : 0,
+                    duration: 0.35,
+                    ease: "power2.out",
+                  });
+                }
+                if (label) {
+                  gsap.to(label, {
+                    autoAlpha: self.isActive ? 1 : 0,
+                    y: self.isActive ? 0 : -8,
+                    duration: 0.35,
+                    ease: "power2.out",
+                  });
+                }
+              },
+
               onRefresh: () => {
                 gsap.set(trackRef.current!, { x: reverse ? -distance() : 0 });
               },
@@ -89,40 +110,6 @@ function RowStrip({
         if (labelRef.current) {
           // Ensure hidden initially
           gsap.set(labelRef.current, { autoAlpha: 0, y: -8 });
-
-          ScrollTrigger.create({
-            trigger: st.trigger, // same element
-            start: st.vars.start as string, // same start
-            end: st.vars.end as any, // same end
-            onEnter: () =>
-              gsap.to(labelRef.current!, {
-                autoAlpha: 1,
-                y: 0,
-                duration: 0.25,
-                ease: "power2.out",
-              }),
-            onLeave: () =>
-              gsap.to(labelRef.current!, {
-                autoAlpha: 0,
-                y: -8,
-                duration: 0.2,
-                ease: "power2.in",
-              }),
-            onEnterBack: () =>
-              gsap.to(labelRef.current!, {
-                autoAlpha: 1,
-                y: 0,
-                duration: 0.25,
-                ease: "power2.out",
-              }),
-            onLeaveBack: () =>
-              gsap.to(labelRef.current!, {
-                autoAlpha: 0,
-                y: -8,
-                duration: 0.2,
-                ease: "power2.in",
-              }),
-          });
         }
 
         onResize = () => ScrollTrigger.refresh();

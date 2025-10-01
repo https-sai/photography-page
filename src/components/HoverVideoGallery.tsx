@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { fadeJump } from "@/pages/Contact";
 
 // Hover‑Play Video Gallery
 // Tech: React + TailwindCSS (no external libs)

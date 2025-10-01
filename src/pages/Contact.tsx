@@ -3,6 +3,7 @@ import React from "react";
 import ContactForm from "@/components/ContactForm";
 import InfiniteMarquee from "@/components/InfiniteMarquee";
 import CleanCalendar from "@/components/CleanCalendar";
+import CalendlyInline from "@/components/CalendlyInline";
 import { MotionConfig, motion, useReducedMotion } from "framer-motion";
 
 // Logo types
@@ -90,7 +91,7 @@ const container = {
   },
 };
 
-const fadeJump = {
+export const fadeJump = {
   hidden: { opacity: 0, y: 28, scale: 0.98 },
   show: {
     opacity: 1,
