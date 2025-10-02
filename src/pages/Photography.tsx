@@ -131,7 +131,7 @@ export default function Photography() {
 
   return (
     <main>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 justify-center pt-30">
         <span>Scroll</span>
         <motion.span
           animate={{ y: [0, 6, 0] }}

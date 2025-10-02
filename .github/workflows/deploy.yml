@@ -1,9 +1,9 @@
-name: Deploy Vite (React) to GitHub Pages
+name: Deploy Vite site to GitHub Pages
 
 on:
   push:
-    branches: [main]
-  workflow_dispatch:
+    branches: ["main"] # deploy only when main updates
+  workflow_dispatch: {} # allow manual runs
 
 permissions:
   contents: read
@@ -25,18 +25,36 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "npm"
+          cache: npm
 
-      - name: Install dependencies
+      # Install deps
+      - name: Install
+        run: npm ci
+
+      # Determine correct BASE for GitHub Pages:
+      # - If repo is <username>.github.io, base must be "/"
+      # - Otherwise, base should be "/<repo-name>/"
+      - name: Compute BASE_URL
+        id: base
+        shell: bash
         run: |
-          if [ -f package-lock.json ]; then npm ci; else npm i; fi
+          REPO="${{ github.event.repository.name }}"
+          if [[ "$REPO" == *.github.io ]]; then
+            echo "SITE_BASE=/" >> "$GITHUB_ENV"
+          else
+            echo "SITE_BASE=/$REPO/" >> "$GITHUB_ENV"
+          fi
+          echo "Using base: ${SITE_BASE:-/}"
 
+      # Build with the computed base so GH Pages serves assets correctly,
+      # while local `npm run dev` remains unaffected.
       - name: Build
-        run: npm run build
+        run: npm run build -- --base="${{ env.SITE_BASE }}"
 
-      # SPA fallback so refresh/deep-links work on GH Pages
-      - name: Copy 404.html
-        run: cp dist/index.html dist/404.html
+      # (Optional) If you use a custom domain, create CNAME:
+      # - name: Add CNAME
+      #   if: ${{ always() }}
+      #   run: echo "example.com" > dist/CNAME
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -44,10 +62,12 @@ jobs:
           path: dist
 
   deploy:
-    needs: build
-    runs-on: ubuntu-latest
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4

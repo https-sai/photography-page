@@ -42,7 +42,7 @@ const router = createBrowserRouter(
       ],
     },
   ],
-  { basename: "/photography-page" }
+  { basename: import.meta.env.BASE_URL }
 );
 
 /**

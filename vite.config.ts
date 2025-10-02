@@ -12,7 +12,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
-  base: "/photography-page//"
+  //base: "/photography-page//"
 
 })
 
