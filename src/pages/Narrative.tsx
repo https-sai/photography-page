@@ -106,13 +106,6 @@ function NameHero() {
 
   return (
     <section className="relative h-[88vh] w-full overflow-hidden">
-      {/* Background accents */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-24 top-10 h-64 w-64 rounded-full bg-emerald-500/20 blur-3xl" />
-        <div className="absolute right-10 top-24 h-72 w-72 rounded-full bg-indigo-500/20 blur-3xl" />
-        <div className="absolute bottom-10 left-1/3 h-56 w-56 rounded-full bg-cyan-500/20 blur-3xl" />
-      </div>
-
       <motion.div
         style={{ scale, opacity }}
         className="grid h-full place-items-center"
@@ -413,7 +406,7 @@ function ProjectsSection() {
 export default function Narrative() {
   return (
     <main className="min-h-screen text-white">
-      <div id="name" className="relative h-[90vh] pt-60">
+      <div id="name" className="relative h-[70vh] pt-40">
         <GradualSpacing text="Anonymous Inc." />
         <motion.div
           initial={{ opacity: 0, y: -6 }}

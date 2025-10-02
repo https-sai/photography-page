@@ -16,7 +16,11 @@ export default function PageTransitionOverlay() {
       className="pointer-events-none fixed inset-0 z-[60] bg-black"
       initial={{ opacity: 0 }}
       animate={{ opacity: [0, 1, 0] }}
-      transition={{ duration: 0.6, times: [0, 0.5, 1], ease: "easeInOut" }}
+      transition={{ duration: 0.9, times: [0, 0.5, 1], ease: "easeInOut" }}
+      onAnimationComplete={() => {
+        // Scroll to top when transition completes
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      }}
     />
   );
 }

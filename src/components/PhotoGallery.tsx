@@ -56,7 +56,7 @@ function RowStrip({
 
         // start hidden
         gsap.set(trackRef.current, { autoAlpha: 0 });
-        gsap.set(labelRef.current, { autoAlpha: 0, y: -8 });
+        gsap.set(labelRef.current, { autoAlpha: 0, y: -4 });
 
         const tween = gsap.fromTo(
           trackRef.current,
@@ -82,7 +82,7 @@ function RowStrip({
                 if (row) {
                   gsap.to(row, {
                     autoAlpha: self.isActive ? 1 : 0,
-                    duration: 0.35,
+                    duration: 0.3,
                     ease: "power2.out",
                   });
                 }

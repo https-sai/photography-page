@@ -4,6 +4,7 @@ import ContactForm from "@/components/ContactForm";
 import InfiniteMarquee from "@/components/InfiniteMarquee";
 import CleanCalendar from "@/components/CleanCalendar";
 import CalendlyInline from "@/components/CalendlyInline";
+import { asset } from "@/lib/asset";
 import { MotionConfig, motion, useReducedMotion } from "framer-motion";
 
 // Logo types
@@ -119,7 +120,7 @@ export default function Contact() {
           <motion.div variants={fadeJump} className="md:col-span-3">
             <InfiniteMarquee
               items={logos}
-              speedSeconds={30}
+              speedSeconds={20}
               gapClass="gap-10"
               fadeEdges
               renderItem={(logo) => (
@@ -130,7 +131,7 @@ export default function Contact() {
                   tabIndex={-1}
                 >
                   <img
-                    src={logo.src}
+                    src={asset(logo.src)}
                     alt={logo.alt ?? logo.name}
                     loading="lazy"
                     className="h-10 w-auto opacity-80 hover:opacity-100 hover:grayscale-0 transition"

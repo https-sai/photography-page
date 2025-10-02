@@ -16,7 +16,7 @@ import { fadeJump } from "./pages/Contact";
  */
 export default function App() {
   const root = React.useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
+  let { scrollYProgress } = useScroll({
     target: root,
     offset: ["start start", "end end"],
   });
@@ -38,7 +38,7 @@ export default function App() {
       </section>
 
       {/** Main Content Area -> Outlet renders current child route component */}
-      <main className="flex-1 py-2 px-4 md:px-8">
+      <main className="flex-1 pt-20 py-8 px-4 md:px-8">
         <Outlet />
       </main>
 
