@@ -157,7 +157,7 @@ function AboutExperience() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-100px" }}
-            className="rounded-sm border border-white/10 bg-white/5 p-6 text-white/80"
+            className="rounded-sm border border-white/10 bg-white/5 p-6 hover:bg-white/10 text-white/80"
           >
             <h3 className="mb-2 text-lg font-semibold text-white">
               Photographer & Filmmaker
@@ -184,7 +184,7 @@ function AboutExperience() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-100px" }}
-            className="rounded-sm border border-white/10 bg-white/5 p-6 text-white/80"
+            className="rounded-sm border border-white/10 bg-white/5 hover:bg-white/10 p-6 text-white/80"
           >
             <h3 className="mb-2 text-lg font-semibold text-white">
               Selected Experience
@@ -240,7 +240,7 @@ function MiniGalleryCard({ project }: { project: MiniGallery }) {
   return (
     <motion.article
       variants={card}
-      className="group relative overflow-hidden rounded-sm border border-white/10 bg-white/5"
+      className="group relative overflow-hidden rounded-sm border border-white/10 bg-white/5 hover:bg-white/10"
     >
       <div className="relative aspect-[4/3] w-full">
         <AnimatePresence initial={false} mode="wait">
